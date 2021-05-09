@@ -77,6 +77,8 @@ contract VolToken is ERC20 {
             sum = sum + price30Days[i];
         }
         // for loop
+        // I need you to explain this but this seems different from the common realized volatility equation
+        // https://breakingdownfinance.com/finance-topics/risk-management/realized-volatility/
         for (uint256 i = 0; i < 10; i++) {
             uint256  meanDiff = price30Days[i] - mean;
             varSum = varSum + meanDiff**meanDiff;
