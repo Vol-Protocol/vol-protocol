@@ -1,5 +1,4 @@
-require("@eth-optimism/plugins/hardhat/compiler");
-require("@eth-optimism/plugins/hardhat/ethers");
+require("@eth-optimism/hardhat-ovm");
 require("@nomiclabs/hardhat-waffle");
 const dotenv = require("dotenv");
 dotenv.config();

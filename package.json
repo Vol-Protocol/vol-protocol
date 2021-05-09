@@ -16,6 +16,7 @@
   },
   "homepage": "https://github.com/Vol-Protocol/vol-protocol-v1#readme",
   "devDependencies": {
+    "@eth-optimism/hardhat-ovm": "^0.1.2",
     "@nomiclabs/hardhat-ethers": "^2.0.2",
     "@nomiclabs/hardhat-waffle": "^2.0.1",
     "@openzeppelin/contracts": "^3.4.1",
@@ -26,7 +27,6 @@
     "hardhat": "^2.2.1"
   },
   "dependencies": {
-    "@eth-optimism/plugins": "^1.0.0-alpha.3",
     "bignumber.js": "^9.0.1"
   }
 }
