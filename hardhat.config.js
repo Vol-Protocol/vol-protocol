@@ -23,18 +23,14 @@ module.exports = {
         runs: 1000
       }
     }
+  },
+  paths: {
+    sources: "./contracts",
+    tests: "./test",
+    cache: "./cache",
+    artifacts: "./artifacts"
+  },
+  mocha: {
+    timeout: 2000000
   }
 };
-
-// module.exports = {
-//   paths: {
-//     sources: "./contracts",
-//     tests: "./test",
-//     cache: "./cache",
-//     artifacts: "./artifacts"
-//   },
-//   mocha: {
-//     // spec: "./test/**/*.spec.js",
-//     timeout: 2000000
-//   },
-// };
