@@ -51,15 +51,6 @@ module.exports = {
 //       accounts: [`0x${process.env.DEPLOYMENT_ACCOUNT_PRIVATE_KEY}`]
 //     }
 //   },
-//   solidity: {
-//     version: "0.7.3",
-//     settings: {
-//       optimizer: {
-//         enabled: true,
-//         runs: 1000
-//       }
-//     }
-//   },
 //   paths: {
 //     sources: "./contracts",
 //     tests: "./test",
@@ -70,7 +61,4 @@ module.exports = {
 //     // spec: "./test/**/*.spec.js",
 //     timeout: 2000000
 //   },
-//   etherscan: {
-//     apiKey: process.env.ETHERSCAN_API_KEY
-//   }
 // };
