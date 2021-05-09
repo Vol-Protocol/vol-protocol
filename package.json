@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "npx hardhat test"
+    "test:fork": "npx hardhat test",
+    "test:optimism": "npx hardhat --network optimism test",
+    "deploy:optimism": "npx hardhat --network optimism deploy"
   },
   "repository": {
     "type": "git",

@@ -56,14 +56,16 @@ contract VolToken is ERC20 {
     }
 
     modifier checkLastUpdated() {
+        //uncomment this when deploying to prod 
         // require(
         //     block.timestamp - lastUpdatedTimestamp > 86400000,
         //     "vol was updated less than day ago"
         // );
         // _;
 
+        //use this for testing only 
         require(
-            block.timestamp - lastUpdatedTimestamp >= 1 days,
+            block.timestamp - lastUpdatedTimestamp >= 0,
             "vol was updated less than a day ago"
         );
         _;
