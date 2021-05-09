@@ -11,7 +11,8 @@ module.exports = {
         mnemonic: process.env.MNEMONIC_WORDS
       },
       gasPrice: 0,
-      gas: "auto"
+      gas: "auto",
+      ovm: true
     }
   },
   solidity: {
