@@ -1,6 +1,14 @@
 require("@nomiclabs/hardhat-waffle");
+require('dotenv').config()
 
 module.exports = {
+  networks: {
+    hardhat: {
+      forking: {
+        url: `https://mainnet.infura.io/v3/${process.env.INFURA_API_KEY}`,
+      }
+    }
+  },
   solidity: {
     version: "0.7.3",
     settings: {

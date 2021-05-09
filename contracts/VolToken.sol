@@ -56,8 +56,14 @@ contract VolToken is ERC20 {
     }
 
     modifier checkLastUpdated() {
+        // require(
+        //     block.timestamp - lastUpdatedTimeStamp > 86400000,
+        //     "vol was updated less than day ago"
+        // );
+        // _;
+        
         require(
-            block.timestamp - lastUpdatedTimeStamp > 86400000,
+            block.timestamp - lastUpdatedTimeStamp >= 0,
             "vol was updated less than day ago"
         );
         _;
@@ -66,29 +72,39 @@ contract VolToken is ERC20 {
     function updateVol() public checkLastUpdated {
         (uint256 reserve0, uint256 reserve1, ) =
             UniswapV2Pair(uniSwapPairAddress).getReserves();
-        price30Days[29] = reverse ? reserve1 / reserve0 : reserve0 / reserve1;
-        // i think you need to remove the price30Days[0], shift an array somehow and then update the price30Days[29]
-        uint256  mean = 0;
-        uint256  sum = 0;
-        uint256  varSum = 0;
-        // for loop
-        // what's the point of having this sum when you don't use it?
+        for (uint256 i = 0; i < 30; i++) {
+            if (i != 29) {
+                price30Days[i] = price30Days[i + 1];
+            } else {
+                price30Days[29] = reverse
+                    ? reserve1 / reserve0
+                    : reserve0 / reserve1;
+            }
+        }
+
+        uint256 mean = 0;
+        uint256 sum = 0;
+        uint256 varSum = 0;
+        uint256 meanDiff = 0;
+        
         for (uint256 i = 0; i < 30; i++) {
             sum = sum + price30Days[i];
         }
-        // for loop
-        // I need you to explain this but this seems different from the common realized volatility equation
-        // https://breakingdownfinance.com/finance-topics/risk-management/realized-volatility/
-        for (uint256 i = 0; i < 10; i++) {
-            uint256  meanDiff = price30Days[i] - mean;
-            varSum = varSum + meanDiff**meanDiff;
+        mean = sum / 30;
+        console.log("sclog mean: ", mean);
+
+        for (uint256 i = 0; i < 30; i++) {
+            meanDiff = price30Days[i] - mean;
+            varSum = varSum + meanDiff * meanDiff;
         }
-        uint256  variance = varSum / 30;
-        console.log('check log feature: ',varSum);
+        console.log("sclog varSum: ", varSum);
+
+        uint256 variance = varSum / 30;
+        console.log("check log feature: ", variance);
         vol = sqrt(variance);
     }
 
-    function getVol() public view  returns(uint){
+    function getVol() public view returns (uint256) {
         return vol;
     }
 

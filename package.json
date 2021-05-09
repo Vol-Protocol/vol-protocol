@@ -25,6 +25,7 @@
     "hardhat": "^2.2.1"
   },
   "dependencies": {
-    "bignumber.js": "^9.0.1"
+    "bignumber.js": "^9.0.1",
+    "dotenv": "^9.0.0"
   }
 }
