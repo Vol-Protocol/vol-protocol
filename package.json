@@ -25,6 +25,7 @@
     "hardhat": "^2.2.1"
   },
   "dependencies": {
+    "@eth-optimism/plugins": "^1.0.0-alpha.3",
     "bignumber.js": "^9.0.1"
   }
 }
