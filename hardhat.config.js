@@ -1,9 +1,20 @@
+require("@eth-optimism/plugins/hardhat/compiler");
+require("@eth-optimism/plugins/hardhat/ethers");
 require("@nomiclabs/hardhat-waffle");
 const dotenv = require("dotenv");
 dotenv.config();
 
-
 module.exports = {
+  networks: {
+    optimism: {
+      url: process.env.L2_NODE_URL || "http://localhost:8545",
+      accounts: {
+        mnemonic: process.env.MNEMONIC_WORDS
+      },
+      gasPrice: 0,
+      gas: 9000000
+    }
+  },
   solidity: {
     version: "0.7.3",
     settings: {
@@ -12,7 +23,7 @@ module.exports = {
         runs: 1000
       }
     }
-  },
+  }
 };
 
 // module.exports = {
