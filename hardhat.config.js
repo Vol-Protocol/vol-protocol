@@ -6,8 +6,8 @@ dotenv.config();
 
 module.exports = {
   networks: {
-    optimism: {
-      url: process.env.L2_NODE_URL || "http://localhost:8545",
+    kovan_optimism: {
+      url: process.env.KOVAN_OPTIMISM_NODE_ENDPOINT || "http://localhost:8545",
       accounts: {
         mnemonic: process.env.MNEMONIC_WORDS
       },
