@@ -17,7 +17,7 @@ interface UniswapV2Pair {
 
 contract VolToken is ERC20 {
     uint256[30] public price30Days;
-    uint256 public lastUpdatedTimeStamp;
+    uint256 public lastUpdatedTimestamp;
     uint256 public vol;
     address public owner;
     address public addr1;
@@ -42,7 +42,7 @@ contract VolToken is ERC20 {
         _mint(msg.sender, 100 * 10**uint256(decimals()));
         price30Days = _price30Days;
         owner = msg.sender;
-        lastUpdatedTimeStamp = block.timestamp;
+        lastUpdatedTimestamp = block.timestamp;
         addr1 = _addr1;
         addr2 = _addr2;
         uniSwapPairAddress = _uniSwapPairAddress;
@@ -57,13 +57,13 @@ contract VolToken is ERC20 {
 
     modifier checkLastUpdated() {
         // require(
-        //     block.timestamp - lastUpdatedTimeStamp > 86400000,
+        //     block.timestamp - lastUpdatedTimestamp > 86400000,
         //     "vol was updated less than day ago"
         // );
         // _;
         
         require(
-            block.timestamp - lastUpdatedTimeStamp >= 1 days,
+            block.timestamp - lastUpdatedTimestamp >= 1 days,
             "vol was updated less than a day ago"
         );
         _;
