@@ -61,7 +61,7 @@ contract VolToken is ERC20 {
         //     "vol was updated less than day ago"
         // );
         // _;
-        
+
         require(
             block.timestamp - lastUpdatedTimestamp >= 1 days,
             "vol was updated less than a day ago"
@@ -86,7 +86,7 @@ contract VolToken is ERC20 {
         uint256 sum = 0;
         uint256 varSum = 0;
         uint256 meanDiff = 0;
-        
+
         for (uint256 i = 0; i < 30; i++) {
             sum = sum + price30Days[i];
         }
@@ -102,6 +102,7 @@ contract VolToken is ERC20 {
         uint256 variance = varSum / 30;
         console.log("check log feature: ", variance);
         vol = sqrt(variance);
+        lastUpdatedTimestamp = block.timestamp;
     }
 
     function getVol() public view returns (uint256) {
