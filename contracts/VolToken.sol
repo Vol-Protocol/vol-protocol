@@ -63,8 +63,8 @@ contract VolToken is ERC20 {
         // _;
         
         require(
-            block.timestamp - lastUpdatedTimeStamp >= 0,
-            "vol was updated less than day ago"
+            block.timestamp - lastUpdatedTimeStamp >= 1 days,
+            "vol was updated less than a day ago"
         );
         _;
     }
