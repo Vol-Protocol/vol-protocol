@@ -67,10 +67,12 @@ contract VolToken is ERC20 {
         (uint256 reserve0, uint256 reserve1, ) =
             UniswapV2Pair(uniSwapPairAddress).getReserves();
         price30Days[29] = reverse ? reserve1 / reserve0 : reserve0 / reserve1;
+        // i think you need to remove the price30Days[0], shift an array somehow and then update the price30Days[29]
         uint256  mean = 0;
         uint256  sum = 0;
         uint256  varSum = 0;
         // for loop
+        // what's the point of having this sum when you don't use it?
         for (uint256 i = 0; i < 30; i++) {
             sum = sum + price30Days[i];
         }
