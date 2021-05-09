@@ -1,4 +1,7 @@
 require("@nomiclabs/hardhat-waffle");
+const dotenv = require("dotenv");
+dotenv.config();
+
 
 module.exports = {
   solidity: {
@@ -11,13 +14,6 @@ module.exports = {
     }
   },
 };
-
-// sorry u can uncomment this. I was getting ES errors with import so had to use require 
-
-// import "@nomiclabs/hardhat-waffle";
-// import "@nomiclabs/hardhat-etherscan";
-// import dotenv from "dotenv";
-// dotenv.config();
 
 // module.exports = {
 //   defaultNetwork: "hardhat",
