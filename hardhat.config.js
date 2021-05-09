@@ -12,7 +12,7 @@ module.exports = {
         mnemonic: process.env.MNEMONIC_WORDS
       },
       gasPrice: 0,
-      gas: 9000000
+      gas: "auto"
     }
   },
   solidity: {
