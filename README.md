@@ -65,3 +65,6 @@ or
 npm run deploy:optimism
 ```
 
+```
+npx hardhat run scripts/deploy.js --network localhost
+```
