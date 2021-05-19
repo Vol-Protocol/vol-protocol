@@ -1,14 +1,18 @@
 ## Instructions to Test on mainet fork or optimism local node
-0. 
+
+0.
+
 ```
 npm install && npm i -g  hardhat
 ```
-1. On a  seprate terminal 
+
+1. On a seprate terminal
+
 ```
 npx hardhat node --fork https://eth-mainnet.alchemyapi.io/v2/XXXXXXXXXXXX
-``` 
+```
 
-for optimism 
+for optimism
 
 ```
 cd optimism
@@ -21,37 +25,42 @@ docker-compose up
 
 2. Put Uniswap Pair address for WETHDAI pair, weth address, dai address, 30day prices, volitility at the time of testing/deployment in `scripts/deploy.js` and `test/sample-test.js`
 
-NOTE: 
+NOTE:
 
 for optimsim first deploy the uniswap factory and pair contracts (TODO)
 
 3. Test smart contracts
-compile
+   compile
+
 ```
-npx hardhat compile 
+npx hardhat compile
 ```
 
-or 
+or
 
 ```
 npx hardhat --network optimism compile
 ```
+
 then test
 
 ```
 npm run test:fork
 ```
-or 
+
+or
+
 ```
 npm run test:optimism
 ```
 
 4. deploy smart contracts
+
 ```
-npx hardhat compile 
+npx hardhat compile
 ```
 
-or 
+or
 
 ```
 npx hardhat --network optimism compile
@@ -60,7 +69,9 @@ npx hardhat --network optimism compile
 ```
 npm run deploy:fork
 ```
-or 
+
+or
+
 ```
 npm run deploy:optimism
 ```

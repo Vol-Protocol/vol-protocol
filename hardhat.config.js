@@ -20,8 +20,10 @@ module.exports = {
       }
     },
     optimism: {
-      url: 'http://127.0.0.1:8545',
-      accounts: ['96ba137fef1fa8e8c720cdd40cba8699f6ac72766e350e4e930ad7139ec1fc08'],
+      url: "http://127.0.0.1:8545",
+      accounts: [
+        "96ba137fef1fa8e8c720cdd40cba8699f6ac72766e350e4e930ad7139ec1fc08"
+      ],
       // This sets the gas price to 0 for all transactions on L2. We do this
       // because account balances are not automatically initiated with an ETH
       // balance (yet, sorry!).

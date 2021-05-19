@@ -1,10 +1,6 @@
 const { BigNumber } = require("@ethersproject/bignumber");
 
-
-
-
-
-//), We require the Hardhat Runtime Environment explicitly here. This is optional 
+//), We require the Hardhat Runtime Environment explicitly here. This is optional
 // but useful for running the script in a standalone fashion through `node <script>`.
 //
 // When running the script with `hardhat run <script>` you'll find the Hardhat
@@ -15,16 +11,29 @@ async function main() {
   // Hardhat always runs the compile task when running scripts with its command
   // line interface.
   //
-  // If this script is run directly using `node` you may want to call compile 
+  // If this script is run directly using `node` you may want to call compile
   // manually to make sure everything is compiled
   // await hre.run('compile');
 
-  let WETHPriceInDAI30Days = [3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900]
+  let WETHPriceInDAI30Days = [
+    3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900,
+    3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900,
+    3000, 2900, 3000, 2900, 3000, 2900
+  ];
 
   // We get the contract to deploy
   const VolToken = await hre.ethers.getContractFactory("VolToken");
   // const VolToken = await hre.l2ethers.getContractFactory("VolToken");
-  const volToken = await VolToken.deploy('ETH 30 day Vol', 'ETH30VOL', WETHPriceInDAI30Days, '0x6B175474E89094C44Da98b954EedeAC495271d0F', '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2', '0xA478c2975Ab1Ea89e8196811F51A7B7Ade33eB11', false, 50);
+  const volToken = await VolToken.deploy(
+    "ETH 30 day Vol",
+    "ETH30VOL",
+    WETHPriceInDAI30Days,
+    "0x6B175474E89094C44Da98b954EedeAC495271d0F",
+    "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+    "0xA478c2975Ab1Ea89e8196811F51A7B7Ade33eB11",
+    false,
+    50
+  );
   await volToken.deployed();
   console.log("VolToken deployed to:", volToken.address);
 }
@@ -33,7 +42,7 @@ async function main() {
 // and properly handle errors.
 main()
   .then(() => process.exit(0))
-  .catch(error => {
+  .catch((error) => {
     console.error(error);
     process.exit(1);
   });
