@@ -5,6 +5,11 @@ require('@openzeppelin/hardhat-defender');
 const dotenv = require("dotenv");
 dotenv.config();
 //✔ {"address":"0xa995b291ec052fcb2038deae955ffbfad62ff30e","privKey":"96ba137fef1fa8e8c720cdd40cba8699f6ac72766e350e4e930ad7139ec1fc08"}
+
+const alchemyKey = infuraKey;
+const infuraKey = infuraKey;
+const mnemonic = process.env.MNEMONIC;
+
 module.exports = {
   defender: {
     apiKey: process.env.DEFENDER_TEAM_API_KEY,
@@ -14,15 +19,15 @@ module.exports = {
   networks: {
     hardhat: {
       forking: {
-        url: `https://eth-mainnet.alchemyapi.io/v2/${process.env.ALCHEMY_API_KEY}`
-        // url: `https://mainnet.infura.io/v3/${process.env.INFURA_API_KEY}`,
+        url: `https://eth-mainnet.alchemyapi.io/v2/${alchemyKey}`
+        // url: `https://mainnet.infura.io/v3/${infuraKey}`,
         // blockNumber: 12274463 // use the same block number to make subsequent runs faster with cache.
       },
       gas: "auto", // gasLimit
       gasPrice: 229000000000, // check the latest gas price market in https://www.ethgasstation.info/
       // inject: false, // optional. If true, it will EXPOSE your mnemonic in your frontend code. Then it would be available as an "in-page browser wallet" / signer which can sign without confirmation.
       accounts: {
-        mnemonic: process.env.MNEMONIC_WORDS
+        mnemonic: mnemonic
       }
     },
     optimism: {
@@ -39,7 +44,7 @@ module.exports = {
     // kovan_optimism: {
     //   url: process.env.KOVAN_OPTIMISM_NODE_ENDPOINT || "http://localhost:8545",
     //   accounts: {
-    //     mnemonic: process.env.MNEMONIC_WORDS
+    //     mnemonic: mnemonic
     //   },
     //   gasPrice: 0,
     //   gas: "auto",
