@@ -5,9 +5,9 @@ import "@openzeppelin/hardhat-defender";
 import dotenv from "dotenv";
 dotenv.config();
 
-const alchemyKey = process.env.ALCHEMY_API_KEY;
-const infuraKey = process.env.INFURA_API_KEY;
-const mnemonic = process.env.MNEMONIC;
+const alchemyKey = process.env.ALCHEMY_API_KEY as string;
+const infuraKey = process.env.INFURA_API_KEY as string;
+const mnemonic = process.env.MNEMONIC as string;
 
 module.exports = {
   defender: {
