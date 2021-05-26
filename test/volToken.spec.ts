@@ -1,5 +1,5 @@
-const { expect } = require("chai");
-const { BigNumber } = require("@ethersproject/bignumber");
+import { expect } from "chai";
+import { BigNumber } from "@ethersproject/bignumber";
 let WETHPriceInDAI30Days = [
   3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900, 3000,
   2900, 3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900,
