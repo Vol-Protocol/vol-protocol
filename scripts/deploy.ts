@@ -1,4 +1,5 @@
-const hre = require("hardhat");
+import hre from "hardhat";
+
 async function main() {
   let WETHPriceInDAI30Days = [
     3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900,
