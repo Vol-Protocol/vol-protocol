@@ -1,13 +1,12 @@
-require("@eth-optimism/hardhat-ovm");
-require("@nomiclabs/hardhat-waffle");
-require("@openzeppelin/hardhat-upgrades");
-require('@openzeppelin/hardhat-defender');
-const dotenv = require("dotenv");
+import "@eth-optimism/hardhat-ovm";
+import "@nomiclabs/hardhat-waffle";
+import "@openzeppelin/hardhat-upgrades";
+import "@openzeppelin/hardhat-defender";
+import dotenv from "dotenv";
 dotenv.config();
-//✔ {"address":"0xa995b291ec052fcb2038deae955ffbfad62ff30e","privKey":"96ba137fef1fa8e8c720cdd40cba8699f6ac72766e350e4e930ad7139ec1fc08"}
 
-const alchemyKey = infuraKey;
-const infuraKey = infuraKey;
+const alchemyKey = process.env.ALCHEMY_API_KEY;
+const infuraKey = process.env.INFURA_API_KEY;
 const mnemonic = process.env.MNEMONIC;
 
 module.exports = {
