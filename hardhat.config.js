@@ -6,6 +6,10 @@ const dotenv = require("dotenv");
 dotenv.config();
 //✔ {"address":"0xa995b291ec052fcb2038deae955ffbfad62ff30e","privKey":"96ba137fef1fa8e8c720cdd40cba8699f6ac72766e350e4e930ad7139ec1fc08"}
 module.exports = {
+  defender: {
+    apiKey: process.env.DEFENDER_TEAM_API_KEY,
+    apiSecret: process.env.DEFENDER_TEAM_API_SECRET_KEY
+  },
   defaultNetwork: "hardhat",
   networks: {
     hardhat: {
