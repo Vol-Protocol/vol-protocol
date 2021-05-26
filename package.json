@@ -6,7 +6,7 @@
     "type": "git",
     "url": "git+https://github.com/Vol-Protocol/vol-protocol-v1.git"
   },
-  "author": "",
+  "author": "Vol Protocol",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Vol-Protocol/vol-protocol-v1/issues"
