@@ -1,5 +1,4 @@
-// scripts/upgrade.js
-import { ethers } from "hardhat";
+import { ethers, upgrades } from "hardhat";
 
 async function main() {
   const newImplName = "";

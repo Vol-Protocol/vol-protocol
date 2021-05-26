@@ -1,4 +1,4 @@
-import hre from "hardhat";
+import hre, { upgrades } from "hardhat";
 
 async function main() {
   let WETHPriceInDAI30Days = [
