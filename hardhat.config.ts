@@ -48,15 +48,6 @@ module.exports = {
       gasPrice: 0,
       ovm: true // This sets the network as using the ovm and ensure contract will be compiled against that.
     }
-    // kovan_optimism: {
-    //   url: process.env.KOVAN_OPTIMISM_NODE_ENDPOINT || "http://localhost:8545",
-    //   accounts: {
-    //     mnemonic: mnemonic
-    //   },
-    //   gasPrice: 0,
-    //   gas: "auto",
-    //   ovm: true
-    // }
   },
   solidity: {
     version: "0.7.6",
