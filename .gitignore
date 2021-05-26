@@ -3,7 +3,5 @@ node_modules
 .gitattributes
 
 #Hardhat files
-cache
-artifacts
 cache-ovm
 artifacts-ovm
