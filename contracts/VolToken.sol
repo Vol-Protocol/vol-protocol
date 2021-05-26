@@ -115,4 +115,8 @@ contract VolToken is ERC20, Initializable {
             z = (x / z + z) / 2;
         }
     }
+
+    function version() public pure virtual returns (string memory) {
+        return "1.0.0";
+    }
 }
