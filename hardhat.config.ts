@@ -14,23 +14,30 @@ module.exports = {
     apiKey: process.env.DEFENDER_TEAM_API_KEY,
     apiSecret: process.env.DEFENDER_TEAM_API_SECRET_KEY
   },
-  defaultNetwork: "hardhat",
+  defaultNetwork: "optimism_local",
   networks: {
-    hardhat: {
-      forking: {
-        url: `https://eth-mainnet.alchemyapi.io/v2/${alchemyKey}`
-        // url: `https://mainnet.infura.io/v3/${infuraKey}`,
-        // blockNumber: 12274463 // use the same block number to make subsequent runs faster with cache.
-      },
-      gas: "auto", // gasLimit
-      gasPrice: 229000000000, // check the latest gas price market in https://www.ethgasstation.info/
-      // inject: false, // optional. If true, it will EXPOSE your mnemonic in your frontend code. Then it would be available as an "in-page browser wallet" / signer which can sign without confirmation.
+    optimism_local: {
+      url: "http://localhost:8545",
+      accounts: [
+        "96ba137fef1fa8e8c720cdd40cba8699f6ac72766e350e4e930ad7139ec1fc08"
+      ],
+      // This sets the gas price to 0 for all transactions on L2. We do this
+      // because account balances are not automatically initiated with an ETH
+      // balance (yet, sorry!).
+      gasPrice: 0,
+      ovm: true // This sets the network as using the ovm and ensure contract will be compiled against that.
+    },
+    optimism_kovan: {
+      url: process.env.KOVAN_OPTIMISM_NODE_ENDPOINT,
       accounts: {
         mnemonic: mnemonic
-      }
+      },
+      gasPrice: 0,
+      gas: "auto",
+      ovm: true
     },
     optimism: {
-      url: "http://127.0.0.1:8545",
+      url: "",
       accounts: [
         "96ba137fef1fa8e8c720cdd40cba8699f6ac72766e350e4e930ad7139ec1fc08"
       ],
