@@ -1,10 +1,12 @@
-## Vol Protocol V1 spec
+## Initial setup
 
-- Treasury
-- Vol Token
-- Vault
-- Reward
-- Oracle
+1. Set up your `.env` environment file.
+
+2. Install dependencies.
+
+```
+npm install
+```
 
 ## Instructions to Test on mainet fork or optimism local node
 
