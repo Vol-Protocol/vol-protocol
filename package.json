@@ -2,11 +2,6 @@
   "name": "vol-protocol-v1",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {
-    "test:fork": "npx hardhat test",
-    "test:optimism": "npx hardhat --network optimism test",
-    "deploy:optimism": "npx hardhat --network optimism deploy"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Vol-Protocol/vol-protocol-v1.git"
@@ -17,6 +12,13 @@
     "url": "https://github.com/Vol-Protocol/vol-protocol-v1/issues"
   },
   "homepage": "https://github.com/Vol-Protocol/vol-protocol-v1#readme",
+  "scripts": {
+    "compile": "npx hardhat compile",
+    "deploy:optimism_local": "npx hardhat run --network optimism_local scripts/deploy.ts",
+    "deploy:optimism_kovan": "npx hardhat run --network optimism_kovan scripts/deploy.ts",
+    "deploy:optimism": "npx hardhat run --network optimism scripts/deploy.ts",
+    "test": "npx hardhat test"
+  },
   "devDependencies": {
     "@eth-optimism/hardhat-ovm": "^0.1.2",
     "@ethersproject/bignumber": "^5.1.1",
