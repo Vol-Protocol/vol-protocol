@@ -12,15 +12,10 @@ describe("VolToken", function () {
   let VolToken;
   let volToken;
 
-  let WethToken;
-  let wethToken;
-
-  let DaiToken;
-  let daiToken;
-
   beforeEach(async function () {
-    VolToken = await ethers.getContractFactory("VolToken");
-    volToken = await VolToken.deploy(
+    VolToken = await hre.l2ethers.getContractFactory("VolToken");
+    console.log("Deploying VolToken...");
+    volToken = await upgrades.deployProxy(VolToken, [
       "ETH 30 day Vol",
       "ETH30VOL",
       WETHPriceInDAI30Days,
@@ -29,20 +24,9 @@ describe("VolToken", function () {
       "0xA478c2975Ab1Ea89e8196811F51A7B7Ade33eB11",
       false,
       50
-    );
+    ]);
     await volToken.deployed();
-
-    WethToken = await ethers.getContractFactory("Weth");
-    wethToken = await WethToken.deploy("Weth Coin", "WETH");
-    await wethToken.deployed();
-
-    console.log("weth address: ", wethToken.address);
-
-    DaiToken = await ethers.getContractFactory("Dai");
-    daiToken = await DaiToken.deploy("Dai Coin", "DAI");
-    await daiToken.deployed();
-
-    console.log("daiToken address: ", daiToken.address);
+    console.log("VolToken deployed to:", volToken.address);
   });
 
   it("1. check sqrt of 4 ", async function () {
