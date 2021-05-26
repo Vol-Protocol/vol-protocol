@@ -1,4 +1,5 @@
 import { expect } from "chai";
+import hre, { upgrades } from "hardhat";
 import { BigNumber } from "@ethersproject/bignumber";
 let WETHPriceInDAI30Days = [
   3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900, 3000,
@@ -13,7 +14,7 @@ describe("VolToken", function () {
   let volToken;
 
   beforeEach(async function () {
-    VolToken = await hre.l2ethers.getContractFactory("VolToken");
+    VolToken = await hre.ethers.getContractFactory("VolToken");
     console.log("Deploying VolToken...");
     volToken = await upgrades.deployProxy(VolToken, [
       "ETH 30 day Vol",
@@ -55,3 +56,4 @@ describe("VolToken", function () {
 
   // });
 });
+

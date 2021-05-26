@@ -7,7 +7,7 @@ async function main() {
     3000, 2900, 3000, 2900, 3000, 2900
   ];
 
-  const VolToken = await hre.l2ethers.getContractFactory("VolToken");
+  const VolToken = await hre.ethers.getContractFactory("VolToken");
   console.log("Deploying VolToken...");
   const volToken = await upgrades.deployProxy(VolToken, [
     "ETH 30 day Vol",
