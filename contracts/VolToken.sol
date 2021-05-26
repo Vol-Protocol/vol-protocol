@@ -3,6 +3,7 @@ pragma solidity 0.7.6;
 import "hardhat/console.sol";
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 
 interface UniswapV2Pair {
     function getReserves()
@@ -15,7 +16,7 @@ interface UniswapV2Pair {
         );
 }
 
-contract VolToken is ERC20 {
+contract VolToken is ERC20, Initializable {
     uint256[30] public price30Days;
     uint256 public lastUpdatedTimestamp;
     uint256 public vol;
@@ -25,7 +26,7 @@ contract VolToken is ERC20 {
     address public uniSwapPairAddress;
     bool public reverse;
 
-    constructor(
+    function initialize(
         string memory _name,
         string memory _symbol,
         uint256[30] memory _price30Days,
@@ -40,6 +41,7 @@ contract VolToken is ERC20 {
         // 1 dollar = 100 cents
         // 1 token = 1 * (10 ** decimals)
         _mint(msg.sender, 100 * 10**uint256(decimals()));
+    ) public ERC20(_name, _symbol) initializer {
         price30Days = _price30Days;
         owner = msg.sender;
         lastUpdatedTimestamp = block.timestamp;
