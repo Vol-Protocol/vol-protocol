@@ -8,9 +8,9 @@ dotenv.config();
 
 const alchemyKey = process.env.ALCHEMY_API_KEY as string;
 const infuraKey = process.env.INFURA_API_KEY as string;
-const mnemonic = process.env.MNEMONIC as string;
+const mnemonic = process.env.MNEMONIC_WORDS as string;
 
-module.exports = {
+export default {
   defender: {
     apiKey: process.env.DEFENDER_TEAM_API_KEY,
     apiSecret: process.env.DEFENDER_TEAM_API_SECRET_KEY
