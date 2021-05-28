@@ -1,20 +1,19 @@
 import { expect } from "chai";
-import hre, { upgrades } from "hardhat";
+import { ethers, upgrades } from "hardhat";
 import { BigNumber } from "@ethersproject/bignumber";
+
 let WETHPriceInDAI30Days = [
   3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900, 3000,
   2900, 3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900,
   3000, 2900, 3000, 2900
 ];
 
-let log = console.log;
-
 describe("VolToken", function () {
   let VolToken;
   let volToken;
 
   beforeEach(async function () {
-    VolToken = await hre.ethers.getContractFactory("VolToken");
+    VolToken = await ethers.getContractFactory("VolToken");
     console.log("Deploying VolToken...");
     volToken = await upgrades.deployProxy(VolToken, [
       "ETH 30 day Vol",
@@ -32,20 +31,20 @@ describe("VolToken", function () {
 
   it("1. check sqrt of 4 ", async function () {
     let sqrtResult = await volToken.sqrt(4);
-    log(`sqrtResult ${sqrtResult}`);
+    console.log(`sqrtResult ${sqrtResult}`);
     expect(sqrtResult).to.equal(2);
   });
 
   it("2. check volitlity ", async function () {
     let vol = await volToken.vol();
-    log(`vol ${vol}`);
+    console.log(`vol ${vol}`);
     expect(vol).to.equal(50);
   });
 
   // it("3. check ????????? ", async function () {
   //   let vol = (await volToken.updateVol())
   //   vol = (await volToken.vol())
-  //   log(`vol ${vol}`)
+  //   console.log(`vol ${vol}`)
 
   //   for (var i = 0; i < 30; i++) {
   //     let price = await volToken.price30Days([i])
