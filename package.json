@@ -14,9 +14,12 @@
   "homepage": "https://github.com/Vol-Protocol/vol-protocol-v1#readme",
   "scripts": {
     "compile": "npx hardhat compile",
-    "deploy:optimism_local": "npx hardhat run --network optimism_local scripts/deploy.ts",
-    "deploy:optimism_kovan": "npx hardhat run --network optimism_kovan scripts/deploy.ts",
-    "deploy:optimism": "npx hardhat run --network optimism scripts/deploy.ts",
+    "node": "npx hardhat node",
+    "deploy:mainnet_forked": "npx hardhat run --network localhost deploy/deploy.ts",
+    "deploy:mainnet": "npx hardhat run --network mainnet scripts/deploy.ts",
+    "deploy:arbitrum_local": "npx hardhat run --network arbitrum_local scripts/deploy.ts",
+    "deploy:arbitrum_kovan": "npx hardhat run --network arbitrum_kovan scripts/deploy.ts",
+    "deploy:arbitrum": "npx hardhat run --network arbitrum scripts/deploy.ts",
     "test": "npx hardhat test"
   },
   "devDependencies": {
