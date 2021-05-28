@@ -10,7 +10,7 @@ let WETHPriceInDAI30Days = [
 
 describe("VolToken", function () {
   let VolToken;
-  let volToken;
+  let volToken:any;
 
   beforeEach(async function () {
     VolToken = await ethers.getContractFactory("VolToken");
