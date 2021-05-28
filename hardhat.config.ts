@@ -1,4 +1,4 @@
-import "@eth-optimism/hardhat-ovm";
+import { HardhatUserConfig } from "hardhat/config";
 import "@nomiclabs/hardhat-etherscan";
 import "@nomiclabs/hardhat-waffle";
 import "@openzeppelin/hardhat-upgrades";
@@ -6,14 +6,18 @@ import "@openzeppelin/hardhat-defender";
 import dotenv from "dotenv";
 dotenv.config();
 
+const defenderApiKey = process.env.DEFENDER_TEAM_API_KEY as string;
+const defenderApiSecret = process.env.DEFENDER_TEAM_API_SECRET_KEY as string;
 const alchemyKey = process.env.ALCHEMY_API_KEY as string;
 const infuraKey = process.env.INFURA_API_KEY as string;
 const mnemonic = process.env.MNEMONIC_WORDS as string;
+const deploymentPrivateKey = process.env
+  .DEPLOYMENT_ACCOUNT_PRIVATE_KEY as string;
 
-export default {
+const config: HardhatUserConfig = {
   defender: {
-    apiKey: process.env.DEFENDER_TEAM_API_KEY,
-    apiSecret: process.env.DEFENDER_TEAM_API_SECRET_KEY
+    apiKey: defenderApiKey,
+    apiSecret: defenderApiSecret
   },
   defaultNetwork: "optimism_local",
   networks: {
@@ -71,3 +75,5 @@ export default {
     apiKey: process.env.ETHERSCAN_API_KEY as string
   }
 };
+
+export default config;
