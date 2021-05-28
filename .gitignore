@@ -3,5 +3,5 @@ node_modules
 .gitattributes
 
 #Hardhat files
-artifact
+artifacts
 cache
