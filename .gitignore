@@ -5,3 +5,6 @@ node_modules
 #Hardhat files
 artifacts
 cache
+
+#OpenZeppelin files
+.openzeppelin
