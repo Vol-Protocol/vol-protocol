@@ -3,5 +3,8 @@ node_modules
 .gitattributes
 
 #Hardhat files
-artifact
+artifacts
 cache
+
+#OpenZeppelin files
+.openzeppelin
