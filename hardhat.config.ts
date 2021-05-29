@@ -6,41 +6,33 @@ import "@openzeppelin/hardhat-defender";
 import dotenv from "dotenv";
 dotenv.config();
 
-const defenderApiKey = process.env.DEFENDER_TEAM_API_KEY as string;
-const defenderApiSecret = process.env.DEFENDER_TEAM_API_SECRET_KEY as string;
-const alchemyKey = process.env.ALCHEMY_API_KEY as string;
-const infuraKey = process.env.INFURA_API_KEY as string;
-const mnemonic = process.env.MNEMONIC_WORDS as string;
-const deploymentPrivateKey = process.env
-  .DEPLOYMENT_ACCOUNT_PRIVATE_KEY as string;
-
 const config: HardhatUserConfig = {
   defender: {
-    apiKey: defenderApiKey,
-    apiSecret: defenderApiSecret
+    apiKey: process.env.DEFENDER_TEAM_API_KEY,
+    apiSecret: process.env.DEFENDER_TEAM_API_SECRET_KEY
   },
   defaultNetwork: "hardhat",
   networks: {
     hardhat: {
       forking: {
-        url: `https://eth-mainnet.alchemyapi.io/v2/${alchemyKey}`
-        // url: `https://mainnet.infura.io/v3/${infuraKey}`,
+        url: `https://eth-mainnet.alchemyapi.io/v2/${process.env.ALCHEMY_API_KEY}`
+        // url: `https://mainnet.infura.io/v3/${process.env.INFURA_API_KEY}`,
         // blockNumber: 12274463 // use the same block number to make subsequent runs faster with cache.
       },
       gas: "auto", // gasLimit
       gasPrice: 229000000000, // check the latest gas price market in https://www.ethgasstation.info/
       // inject: false, // optional. If true, it will EXPOSE your mnemonic in your frontend code. Then it would be available as an "in-page browser wallet" / signer which can sign without confirmation.
       accounts: {
-        mnemonic: mnemonic
+        mnemonic: process.env.MNEMONIC_WORDS
       }
     },
     mainnet: {
-      url: `https://eth-mainnet.alchemyapi.io/v2/${alchemyKey}`,
-      // url: `https://mainnet.infura.io/v3/${infuraKey}`,
+      url: `https://eth-mainnet.alchemyapi.io/v2/${process.env.ALCHEMY_API_KEY}`,
+      // url: `https://mainnet.infura.io/v3/${process.env.INFURA_API_KEY}`,
       gas: "auto", // gasLimit
       gasPrice: 41000000000, // check the latest gas price market in https://www.ethgasstation.info/
       // inject: false, // optional. If true, it will EXPOSE your mnemonic in your frontend code. Then it would be available as an "in-page browser wallet" / signer which can sign without confirmation.
-      accounts: [`0x${deploymentPrivateKey}`]
+      accounts: [`0x${process.env.DEPLOYMENT_ACCOUNT_PRIVATE_KEY}`]
     },
     arbitrum_local: {
       url: "http://localhost:8545",
@@ -57,7 +49,7 @@ const config: HardhatUserConfig = {
       chainId: 212984383488152,
       gasPrice: 20000000000,
       accounts: {
-        mnemonic: mnemonic
+        mnemonic: process.env.MNEMONIC_WORDS
       },
       gas: "auto"
     },
@@ -91,7 +83,7 @@ const config: HardhatUserConfig = {
     timeout: 2000000
   },
   etherscan: {
-    apiKey: process.env.ETHERSCAN_API_KEY as string
+    apiKey: process.env.ETHERSCAN_API_KEY
   }
 };
 
