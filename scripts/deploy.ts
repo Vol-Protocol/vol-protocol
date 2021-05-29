@@ -1,15 +1,15 @@
 import { ethers, upgrades } from "hardhat";
 
 async function main() {
-  let WETHPriceInDAI30Days = [
+  let WETHPriceInDAI30Days: number[] = [
     3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900,
     3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900,
     3000, 2900, 3000, 2900, 3000, 2900
   ];
 
-  const VolToken = await ethers.getContractFactory("VolToken");
+  const VolToken: any = await ethers.getContractFactory("VolToken");
   console.log("Deploying VolToken...");
-  const volToken = await upgrades.deployProxy(VolToken, [
+  const volToken: any = await upgrades.deployProxy(VolToken, [
     "ETH 30 day Vol",
     "ETH30VOL",
     WETHPriceInDAI30Days,

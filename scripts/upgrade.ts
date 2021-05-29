@@ -1,8 +1,8 @@
 import { ethers, upgrades } from "hardhat";
 
 async function main() {
-  const newImplName = "";
-  const NewImpl = await ethers.getContractFactory(newImplName);
+  const newImplName: string = "";
+  const NewImpl: any = await ethers.getContractFactory(newImplName);
   console.log(`Upgrading to ${newImplName}...`);
   await upgrades.upgradeProxy("replace with your proxy address", NewImpl);
   console.log(`VolToken upgraded to:`, newImplName);
