@@ -2,15 +2,15 @@ import { expect } from "chai";
 import { ethers, upgrades } from "hardhat";
 import { BigNumber } from "@ethersproject/bignumber";
 
-let WETHPriceInDAI30Days = [
+let WETHPriceInDAI30Days: number[] = [
   3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900, 3000,
   2900, 3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900,
   3000, 2900, 3000, 2900
 ];
 
 describe("VolToken", function () {
-  let VolToken;
-  let volToken:any;
+  let VolToken: any;
+  let volToken: any;
 
   beforeEach(async function () {
     VolToken = await ethers.getContractFactory("VolToken");
@@ -30,13 +30,13 @@ describe("VolToken", function () {
   });
 
   it("1. check sqrt of 4 ", async function () {
-    let sqrtResult = await volToken.sqrt(4);
+    let sqrtResult: number = await volToken.sqrt(4);
     console.log(`sqrtResult ${sqrtResult}`);
     expect(sqrtResult).to.equal(2);
   });
 
   it("2. check volitlity ", async function () {
-    let vol = await volToken.vol();
+    let vol: number = await volToken.vol();
     console.log(`vol ${vol}`);
     expect(vol).to.equal(50);
   });
