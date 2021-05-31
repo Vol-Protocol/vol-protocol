@@ -16,7 +16,7 @@
   "include": [
     "scripts/**/*",
     "test/**/*",
-    "typechain/**/*",
+    "environment.d.ts",
     "hardhat.config.ts"
   ]
 }
