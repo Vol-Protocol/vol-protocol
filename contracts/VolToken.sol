@@ -3,17 +3,8 @@ pragma solidity 0.8.0;
 
 import "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
+import "./interfaces/IUniswapV2Pair.sol";
 
-interface UniswapV2Pair {
-  function getReserves()
-    external
-    view
-    returns (
-      uint112 reserve0,
-      uint112 reserve1,
-      uint32 blockTimestampLast
-    );
-}
 
 contract VolToken is ERC20Upgradeable {
   uint256[30] public price30Days;
