@@ -62,7 +62,7 @@ contract VolToken is ERC20Upgradeable {
 
   function updateVol() public checkLastUpdated {
     (uint256 reserve0, uint256 reserve1, ) =
-      UniswapV2Pair(uniSwapPairAddress).getReserves();
+      IUniswapV2Pair(uniSwapPairAddress).getReserves();
     for (uint256 i = 0; i < 30; i++) {
       if (i != 29) {
         price30Days[i] = price30Days[i + 1];
