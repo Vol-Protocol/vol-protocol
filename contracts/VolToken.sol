@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.0;
-import "hardhat/console.sol";
 
 import "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
@@ -88,16 +87,13 @@ contract VolToken is ERC20Upgradeable {
       sum = sum + price30Days[i];
     }
     mean = sum / 30;
-    console.log("sclog mean: ", mean);
 
     for (uint256 i = 0; i < 30; i++) {
       meanDiff = price30Days[i] - mean;
       varSum = varSum + meanDiff * meanDiff;
     }
-    console.log("sclog varSum: ", varSum);
 
     uint256 variance = varSum / 30;
-    console.log("check log feature: ", variance);
     vol = sqrt(variance);
     lastUpdatedTimestamp = block.timestamp;
   }
