@@ -3,16 +3,16 @@ pragma solidity 0.8.0;
 
 import "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
+import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/math/SafeMathUpgradeable.sol";
 import "./interfaces/IUniswapV2Pair.sol";
 
+contract VolToken is ERC20Upgradeable, OwnableUpgradeable {
   using SafeMathUpgradeable for uint256;
 
-contract VolToken is ERC20Upgradeable {
   uint256[30] public price30Days;
   uint256 public lastUpdatedTimestamp;
   uint256 public vol;
-  address public owner;
   address public addr1;
   address public addr2;
   address public uniSwapPairAddress;
@@ -29,7 +29,6 @@ contract VolToken is ERC20Upgradeable {
     uint256 _vol
   ) public initializer {
     price30Days = _price30Days;
-    owner = msg.sender;
     lastUpdatedTimestamp = block.timestamp;
     addr1 = _addr1;
     addr2 = _addr2;
@@ -37,11 +36,7 @@ contract VolToken is ERC20Upgradeable {
     reverse = _reverse;
     vol = _vol;
     ERC20Upgradeable.__ERC20_init(_name, _symbol);
-  }
-
-  modifier onlyOwner() {
-    require(msg.sender == owner, "Not owner");
-    _;
+    OwnableUpgradeable.__Ownable_init();
   }
 
   modifier checkLastUpdated() {
