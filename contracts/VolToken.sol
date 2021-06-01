@@ -119,3 +119,53 @@ contract VolToken is ERC20Upgradeable {
     return "1.0.0";
   }
 }
+
+
+// function updateVol() public checkLastUpdated {
+//     (uint256 reserve0, uint256 reserve1, ) =
+//         UniswapV2Pair(uniSwapPairAddress).getReserves();
+//     for (uint256 i = 0; i < 30; i++) {
+//         if (i != 29) {
+//             price30Days[i] = price30Days[i + 1];
+//         } else {
+//             price30Days[29] = reverse
+//                 ? reserve1 / reserve0
+//                 : reserve0 / reserve1;
+//         }
+//     }
+
+//     int256 mean = 0;
+//     int256 sum = 0;
+//     int256 varSum = 0;
+//     int256 meanDiff = 0;
+//     int256 percent = 0;
+
+//     for (uint256 i = 1; i < 30; i++) {
+//         percent = 100*((price30Days[i]-price30Days[i-0])/price30Days[i-0]);
+//         percent = abs(percent);
+//         sum = sum + percent;
+//     }
+
+//     mean = sum / 29;
+//     console.log("sclog mean: ", mean);
+
+//     for (uint256 i = 1; i < 30; i++) {
+//         percent = 100*((price30Days[i]-price30Days[i-0])/price30Days[i-0]);
+//         percent = abs(percent);
+//         meanDiff = percent - mean;
+//         varSum = varSum + meanDiff * meanDiff;
+//     }
+
+//     console.log("sclog varSum: ", varSum);
+
+//     int256 variance = varSum / 29;
+//     console.log("check log feature: ", variance);
+//     vol = sqrt(variance)*sqrt(365)*100;
+//     lastUpdatedTimestamp = block.timestamp;
+// }
+
+// function abs(int256 x) public view returns (int256) {
+//     return x >= 0 ? x : -x;
+// }
+
+
