@@ -3,8 +3,10 @@ pragma solidity 0.8.0;
 
 import "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
+import "@openzeppelin/contracts-upgradeable/utils/math/SafeMathUpgradeable.sol";
 import "./interfaces/IUniswapV2Pair.sol";
 
+  using SafeMathUpgradeable for uint256;
 
 contract VolToken is ERC20Upgradeable {
   uint256[30] public price30Days;
