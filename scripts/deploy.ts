@@ -6,8 +6,14 @@ async function main() {
     3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900,
     3000, 2900, 3000, 2900, 3000, 2900
   ];
+  let deployer: any;
+  try {
+    [deployer] = await ethers.getSigners();
+  } catch (e) {
+    console.log(e);
+  }
 
-  const VolToken: any = await ethers.getContractFactory("VolToken");
+  const VolToken: any = await ethers.getContractFactory("VolToken", deployer.address);
   console.log("Deploying VolToken...");
   const volToken: any = await upgrades.deployProxy(VolToken, [
     "ETH 30 day Vol",
