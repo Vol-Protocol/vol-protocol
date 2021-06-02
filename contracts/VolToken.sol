@@ -13,8 +13,6 @@ contract VolToken is ERC20Upgradeable, OwnableUpgradeable {
   uint256[30] public price30Days;
   uint256 public lastUpdatedTimestamp;
   uint256 public vol;
-  address public addr1;
-  address public addr2;
   address public uniSwapPairAddress;
   bool public reverse;
 
@@ -22,16 +20,12 @@ contract VolToken is ERC20Upgradeable, OwnableUpgradeable {
     string memory _name,
     string memory _symbol,
     uint256[30] memory _price30Days,
-    address _addr1,
-    address _addr2,
     address _uniSwapPairAddress,
     bool _reverse,
     uint256 _vol
   ) public initializer {
     price30Days = _price30Days;
     lastUpdatedTimestamp = block.timestamp;
-    addr1 = _addr1;
-    addr2 = _addr2;
     uniSwapPairAddress = _uniSwapPairAddress;
     reverse = _reverse;
     vol = _vol;
