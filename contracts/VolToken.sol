@@ -1,54 +1,56 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.0;
-import "hardhat/console.sol";
 
+import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
+import "@openzeppelin/contracts-upgradeable/utils/math/SafeMathUpgradeable.sol";
+import "./interfaces/IUniswapV2Pair.sol";
 
-interface UniswapV2Pair {
-  function getReserves()
-    external
-    view
-    returns (
-      uint112 reserve0,
-      uint112 reserve1,
-      uint32 blockTimestampLast
-    );
-}
+contract VolToken is ERC20Upgradeable, OwnableUpgradeable {
+  using SafeMathUpgradeable for uint256;
 
-contract VolToken is ERC20Upgradeable {
   uint256[30] public price30Days;
   uint256 public lastUpdatedTimestamp;
   uint256 public vol;
-  address public owner;
-  address public addr1;
-  address public addr2;
   address public uniSwapPairAddress;
   bool public reverse;
+
+  /// @notice Address to Vault Handler
+  /// @dev Only vault handlers can mint and burn Vol tokens
+  mapping(address => bool) public vaultHandlers;
+
+  /// @notice An event emitted when a vault handler is added
+  event VaultHandlerAdded(
+    address indexed _owner,
+    address indexed _tokenHandler
+  );
+
+  /// @notice An event emitted when a vault handler is removed
+  event VaultHandlerRemoved(
+    address indexed _owner,
+    address indexed _tokenHandler
+  );
 
   function initialize(
     string memory _name,
     string memory _symbol,
     uint256[30] memory _price30Days,
-    address _addr1,
-    address _addr2,
     address _uniSwapPairAddress,
     bool _reverse,
     uint256 _vol
   ) public initializer {
     price30Days = _price30Days;
-    owner = msg.sender;
     lastUpdatedTimestamp = block.timestamp;
-    addr1 = _addr1;
-    addr2 = _addr2;
     uniSwapPairAddress = _uniSwapPairAddress;
     reverse = _reverse;
     vol = _vol;
-    ERC20Upgradeable.__ERC20_init(_name, _symbol);
+    __ERC20_init(_name, _symbol);
+    __Ownable_init();
   }
 
-  modifier onlyOwner() {
-    require(msg.sender == owner, "Not owner");
+  /// @notice Reverts if called by any account that is not a vault.
+  modifier onlyVault() {
+    require(vaultHandlers[msg.sender], "caller is not a vault");
     _;
   }
 
@@ -70,7 +72,7 @@ contract VolToken is ERC20Upgradeable {
 
   function updateVol() public checkLastUpdated {
     (uint256 reserve0, uint256 reserve1, ) =
-      UniswapV2Pair(uniSwapPairAddress).getReserves();
+      IUniswapV2Pair(uniSwapPairAddress).getReserves();
     for (uint256 i = 0; i < 30; i++) {
       if (i != 29) {
         price30Days[i] = price30Days[i + 1];
@@ -88,16 +90,13 @@ contract VolToken is ERC20Upgradeable {
       sum = sum + price30Days[i];
     }
     mean = sum / 30;
-    console.log("sclog mean: ", mean);
 
     for (uint256 i = 0; i < 30; i++) {
       meanDiff = price30Days[i] - mean;
       varSum = varSum + meanDiff * meanDiff;
     }
-    console.log("sclog varSum: ", varSum);
 
     uint256 variance = varSum / 30;
-    console.log("check log feature: ", variance);
     vol = sqrt(variance);
     lastUpdatedTimestamp = block.timestamp;
   }
@@ -106,13 +105,41 @@ contract VolToken is ERC20Upgradeable {
     return vol;
   }
 
-  function sqrt(uint256 x) public view returns (uint256 y) {
+  function sqrt(uint256 x) private pure returns (uint256 y) {
     uint256 z = (x + 1) / 2;
     y = x;
     while (z < y) {
       y = z;
       z = (x / z + z) / 2;
     }
+  }
+
+  /// @notice Adds a new address as a vault
+  /// @param _vaultHandler address of a contract with permissions to mint and burn tokens
+  function addVaultHandler(address _vaultHandler) external onlyOwner {
+    vaultHandlers[_vaultHandler] = true;
+    emit VaultHandlerAdded(msg.sender, _vaultHandler);
+  }
+
+  /// @notice Removes an address as a vault
+  /// @param _vaultHandler address of the contract to be removed as vault
+  function removeVaultHandler(address _vaultHandler) external onlyOwner {
+    vaultHandlers[_vaultHandler] = false;
+    emit VaultHandlerRemoved(msg.sender, _vaultHandler);
+  }
+
+  /// @notice Mints Vol Tokens
+  /// @param _account address of the receiver of tokens
+  /// @param _amount uint of tokens to mint
+  function mint(address _account, uint256 _amount) external onlyVault {
+    _mint(_account, _amount);
+  }
+
+  /// @notice Burns Vol Tokens
+  /// @param _account address of the account which is burning tokens.
+  /// @param _amount uint of tokens to burn
+  function burn(address _account, uint256 _amount) external onlyVault {
+    _burn(_account, _amount);
   }
 
   function version() public pure virtual returns (string memory) {
