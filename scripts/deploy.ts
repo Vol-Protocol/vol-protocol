@@ -1,11 +1,13 @@
 import { ethers, upgrades } from "hardhat";
 
+// get the actual value here.
+let WETHPriceInDAI30Days: number[] = [
+  3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900, 3000,
+  2900, 3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900,
+  3000, 2900, 3000, 2900
+];
+
 async function main() {
-  let WETHPriceInDAI30Days: number[] = [
-    3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900,
-    3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900, 3000, 2900,
-    3000, 2900, 3000, 2900, 3000, 2900
-  ];
   let deployer: any;
   try {
     [deployer] = await ethers.getSigners();
@@ -17,7 +19,7 @@ async function main() {
   console.log("Deploying VolToken...");
   const volToken: any = await upgrades.deployProxy(VolToken, [
     "ETH 30 day Vol",
-    "ETH30VOL",
+    "vETH30",
     WETHPriceInDAI30Days,
     "0xA478c2975Ab1Ea89e8196811F51A7B7Ade33eB11",
     false,
