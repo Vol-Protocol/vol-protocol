@@ -1,9 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.0;
 
-import "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/math/SafeMathUpgradeable.sol";
 import "./interfaces/IUniswapV2Pair.sol";
 
@@ -45,8 +44,10 @@ contract VolToken is ERC20Upgradeable, OwnableUpgradeable {
     uniSwapPairAddress = _uniSwapPairAddress;
     reverse = _reverse;
     vol = _vol;
-    ERC20Upgradeable.__ERC20_init(_name, _symbol);
-    OwnableUpgradeable.__Ownable_init();
+    __ERC20_init(_name, _symbol);
+    __Ownable_init();
+  }
+
   /// @notice Reverts if called by any account that is not a vault.
   modifier onlyVault() {
     require(vaultHandlers[msg.sender], "caller is not a vault");
