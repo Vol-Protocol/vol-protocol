@@ -47,6 +47,10 @@ contract VolToken is ERC20Upgradeable, OwnableUpgradeable {
     vol = _vol;
     ERC20Upgradeable.__ERC20_init(_name, _symbol);
     OwnableUpgradeable.__Ownable_init();
+  /// @notice Reverts if called by any account that is not a vault.
+  modifier onlyVault() {
+    require(vaultHandlers[msg.sender], "caller is not a vault");
+    _;
   }
 
   modifier checkLastUpdated() {
