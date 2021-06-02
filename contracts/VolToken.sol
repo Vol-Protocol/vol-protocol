@@ -127,6 +127,20 @@ contract VolToken is ERC20Upgradeable, OwnableUpgradeable {
     emit VaultHandlerRemoved(msg.sender, _vaultHandler);
   }
 
+  /// @notice Mints Vol Tokens
+  /// @param _account address of the receiver of tokens
+  /// @param _amount uint of tokens to mint
+  function mint(address _account, uint256 _amount) external onlyVault {
+    _mint(_account, _amount);
+  }
+
+  /// @notice Burns Vol Tokens
+  /// @param _account address of the account which is burning tokens.
+  /// @param _amount uint of tokens to burn
+  function burn(address _account, uint256 _amount) external onlyVault {
+    _burn(_account, _amount);
+  }
+
   function version() public pure virtual returns (string memory) {
     return "1.0.0";
   }
