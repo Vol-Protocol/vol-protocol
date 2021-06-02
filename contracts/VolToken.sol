@@ -16,6 +16,22 @@ contract VolToken is ERC20Upgradeable, OwnableUpgradeable {
   address public uniSwapPairAddress;
   bool public reverse;
 
+  /// @notice Address to Vault Handler
+  /// @dev Only vault handlers can mint and burn Vol tokens
+  mapping(address => bool) public vaultHandlers;
+
+  /// @notice An event emitted when a vault handler is added
+  event VaultHandlerAdded(
+    address indexed _owner,
+    address indexed _tokenHandler
+  );
+
+  /// @notice An event emitted when a vault handler is removed
+  event VaultHandlerRemoved(
+    address indexed _owner,
+    address indexed _tokenHandler
+  );
+
   function initialize(
     string memory _name,
     string memory _symbol,
@@ -91,6 +107,20 @@ contract VolToken is ERC20Upgradeable, OwnableUpgradeable {
       y = z;
       z = (x / z + z) / 2;
     }
+  }
+
+  /// @notice Adds a new address as a vault
+  /// @param _vaultHandler address of a contract with permissions to mint and burn tokens
+  function addVaultHandler(address _vaultHandler) external onlyOwner {
+    vaultHandlers[_vaultHandler] = true;
+    emit VaultHandlerAdded(msg.sender, _vaultHandler);
+  }
+
+  /// @notice Removes an address as a vault
+  /// @param _vaultHandler address of the contract to be removed as vault
+  function removeVaultHandler(address _vaultHandler) external onlyOwner {
+    vaultHandlers[_vaultHandler] = false;
+    emit VaultHandlerRemoved(msg.sender, _vaultHandler);
   }
 
   function version() public pure virtual returns (string memory) {
