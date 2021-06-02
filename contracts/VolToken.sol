@@ -84,7 +84,7 @@ contract VolToken is ERC20Upgradeable, OwnableUpgradeable {
     return vol;
   }
 
-  function sqrt(uint256 x) public view returns (uint256 y) {
+  function sqrt(uint256 x) private pure returns (uint256 y) {
     uint256 z = (x + 1) / 2;
     y = x;
     while (z < y) {
